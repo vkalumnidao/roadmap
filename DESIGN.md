@@ -68,7 +68,7 @@ cast_nay$1 proposal_id:uint8 = CastVote
 ```
 state$_ owner_id:unit32 proposals:HashMapE 3 ProposalState = State
 
-proposal_state expriration_date:uint64 yay:uint32 nay:uint32 body:^Proposal = ProposalState
+proposal_state expriration_date:uint64 yay:(BitstringSet 32) nay:(BitstringSet 32) body:^Proposal = ProposalState
 ```
 
 ## Proof check
@@ -99,6 +99,7 @@ Knowing all above we compute expected SBT item address and check that sender adr
 3. Proposal contract performs SBT proof check.
 4. If SBT proof is correct, Proposal contract checks whether the proposal is expired or not. If it is, the vote is rejected.
    Otherwise, proposal contract updates corresponding proposal state according to cast vote.
+5. We store votes inside BitStringSet to prevent double votes.
 
 ## Proposal decision
 
