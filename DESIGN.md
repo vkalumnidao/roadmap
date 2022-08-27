@@ -102,6 +102,9 @@ Knowing all above we compute expected SBT item address and check that sender adr
 
 ## Proposal decision
 
-1. Any expired proposal in the state of proposal contract considered to be eligible to be decided on.
-2. To decide on it anybody can send an external message to proposal contract with proposal_id.
-3. If proposal with proposal_id is expired, it will be deleted from contract state and log message will be generated.
+1.  Any expired proposal in the state of proposal contract considered to be eligible to be decided on.
+2.  To decide on it anybody can send an external message to proposal contract with proposal_id.
+3.  If proposal with proposal_id is expired, it will be deleted from contract state and decision would be executed:
+    - For add poposal, the new SBT token would be minted via command to NFT collection contract
+    - For remove proposal, current SBT token would be destroyed via command to NFT collection contract
+    - Generic proposal, just generates a log message with its result
